@@ -13,11 +13,11 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - name: Unduh Folder dari Google Drive
-        uses: tsur/gdrive-action@v2.2
+        uses: tsur/gdrive-actions@v2.2
         with:
           credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
           command: download-folder
-          source: '1-0pb8C828b-oIRhK75JP6U0n2AQ684kU' # ID Folder Google Drive Anda
+          source: '1-0pb8C828b-oIRhK75JP6U0n2AQ684kU'
           destination: './'
 
       - name: Gabung semua lagu jadi satu file audio
@@ -29,11 +29,11 @@ jobs:
         run: ffmpeg -stream_loop -1 -i video_latar.mp4 -i lagu_gabungan.mp3 -map 0:v -map 1:a -c:v copy -shortest video_final.mp4
 
       - name: Unggah Video ke Google Drive
-        uses: tsur/gdrive-action@v2.2
+        uses: tsur/gdrive-actions@v2.2
         with:
           credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
           command: upload
           source: 'video_final.mp4'
-          destination: '1-0pb8C828b-oIRhK75JP6U0n2AQ684kU' # ID Folder Google Drive Anda
+          destination: 1-0pb8C828b-oIRhK75JP6U0n2AQ684kU
           overwrite: true
           
